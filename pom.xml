@@ -22,8 +22,6 @@
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
           <configuration>
-            <source>${project.java.version}</source>
-            <target>${project.java.version}</target>
             <encoding>${project.build.sourceEncoding}</encoding>
             <descriptorRefs>
               <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -54,8 +52,12 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>dmulloy2-repo</id>
-            <url>http://repo.dmulloy2.net/nexus/repository/public/</url>
+             <id>dmulloy2-repo</id>
+             <url>https://repo.dmulloy2.net/repository/public/</url>
+        </repository>
+        <repository>
+            <id>protocollib</id>
+            <url>https://mvnrepository.com/artifact/com.comphenix.protocol/ProtocolLib-API</url>
           </repository>
         <!--Bungeecord Repo-->
         <!--Only include if using the Spigot API dependency-->
@@ -68,8 +70,9 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
+            <scope>system</scope>
             <version>1.15.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <systemPath>C:/Users/Administrator/Downloads/spigot-1.15.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
