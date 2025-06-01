@@ -275,6 +275,12 @@ public class MainLg extends JavaPlugin{
 					loadConfig();
 					return true;
 				}else if(args[0].equalsIgnoreCase("joinall")) {
+//					for(Player player : Bukkit.getOnlinePlayers()) {
+//						WrapperPlayServerScoreboardTeam removeTeam = new WrapperPlayServerScoreboardTeam();
+//						removeTeam.setName(player.getName());
+//						removeTeam.setMode(1);
+//						removeTeam.sendPacket(player);
+//					}
 					for(Player p : Bukkit.getOnlinePlayers())
 						Bukkit.getPluginManager().callEvent(new PlayerQuitEvent(p, "joinall"));
 					for(Player p : Bukkit.getOnlinePlayers())

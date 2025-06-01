@@ -33,6 +33,8 @@ public class CustomScoreboardEntry {
 			team.setName(name);
 			team.setMode(0);
 			team.setPrefix(prefix);
+			team.setNameTagVisibility("always");
+			team.setCollisionRule("never");
 			if(suffix != null)
 				team.setSuffix(suffix);
 			team.sendPacket(scoreboard.getPlayer().getPlayer());
@@ -81,6 +83,9 @@ public class CustomScoreboardEntry {
 				team.setName(name);
 				team.setMode(2);
 				team.setPrefix(prefix);
+				team.setNameTagVisibility("always");
+				team.setCollisionRule("never");
+
 				if(suffix != null)
 					team.setSuffix(suffix);
 				team.sendPacket(scoreboard.getPlayer().getPlayer());
@@ -103,6 +108,9 @@ public class CustomScoreboardEntry {
 			team.setName(name);
 			team.setMode(1);
 			team.sendPacket(scoreboard.getPlayer().getPlayer());
+			team.setNameTagVisibility("always");
+			team.setCollisionRule("never");
+
 		}
 	}
 

@@ -31,17 +31,32 @@ public class JoinListener implements Listener{
 		myTeam.setPrefix(WrappedChatComponent.fromText(""));
 		myTeam.setPlayers(Arrays.asList(p.getName()));
 		myTeam.setMode(0);
+		myTeam.setNameTagVisibility("always");
+		myTeam.setCollisionRule("never");
+
 		boolean noSpec = p.getGameMode() != GameMode.SPECTATOR;
+		for (Player receiver : Bukkit.getOnlinePlayers()) {
+			for (Player teamOwner : Bukkit.getOnlinePlayers()) {
+				WrapperPlayServerScoreboardTeam remove = new WrapperPlayServerScoreboardTeam();
+				remove.setName(teamOwner.getName());
+				remove.setMode(1); // 1 = remove team
+				remove.sendPacket(receiver);
+			}
+		}
+
 		for(Player player : Bukkit.getOnlinePlayers())
 			if(player != p) {
 				if(player.getGameMode() != GameMode.SPECTATOR)
 					player.hidePlayer(p);
+
 				WrapperPlayServerScoreboardTeam team = new WrapperPlayServerScoreboardTeam();
 				team.setName(player.getName());
 				team.setPrefix(WrappedChatComponent.fromText(""));
 				team.setPlayers(Arrays.asList(player.getName()));
 				team.setMode(0);
-				
+				team.setNameTagVisibility("always");
+				team.setCollisionRule("never");
+
 				team.sendPacket(p);
 				myTeam.sendPacket(player);
 			}
@@ -80,6 +95,13 @@ public class JoinListener implements Listener{
 				lgp.getGame().kill(lgp, Reason.DISCONNECTED, true);
 			lgp.getGame().getInGame().remove(lgp);
 			lgp.getGame().checkLeave();
+		}
+		// Supprimer la team du joueur pour tous les joueurs
+		WrapperPlayServerScoreboardTeam removeTeam = new WrapperPlayServerScoreboardTeam();
+		removeTeam.setName(p.getName());
+		removeTeam.setMode(1); // 1 = remove team
+		for(Player online : Bukkit.getOnlinePlayers()) {
+			removeTeam.sendPacket(online);
 		}
 		LGPlayer.removePlayer(p);
 		lgp.remove();

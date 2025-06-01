@@ -1,8 +1,3 @@
-
-**⚠️ Ce projet n'est plus maintenu, n'hesitez pas le forker ou à participer aux forks déjà existant. Voir [cette issue](https://github.com/leomelki/LoupGarou/issues/71). ⚠️**
-
-  
-
 ## Table des matières
 
 - [À propos](#à-propos)

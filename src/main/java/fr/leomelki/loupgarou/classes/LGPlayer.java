@@ -165,7 +165,10 @@ public class LGPlayer {
 						team.setPrefix(WrappedChatComponent.fromText(""));
 						team.setPlayers(Arrays.asList(lgp.getName()));
 						team.sendPacket(getPlayer());
-						
+						team.setNameTagVisibility("always");
+						team.setCollisionRule("never");
+
+
 						WrapperPlayServerPlayerInfo info = new WrapperPlayServerPlayerInfo();
 						ArrayList<PlayerInfoData> infos = new ArrayList<PlayerInfoData>();
 						info.setAction(PlayerInfoAction.ADD_PLAYER);
@@ -197,6 +200,9 @@ public class LGPlayer {
 				team.setPrefix(WrappedChatComponent.fromText(""));
 				team.setPlayers(meList);
 				team.sendPacket(lgp.getPlayer());
+				team.setNameTagVisibility("always");
+				team.setCollisionRule("never");
+
 			}
 		}
 	}
@@ -249,16 +255,21 @@ public class LGPlayer {
 			((CraftPlayer)getPlayer()).getHandle().playerConnection.sendPacket(respawn);
 			//Enfin, on le téléporte à sa potion actuelle car sinon il se verra dans le vide
 			getPlayer().teleport(getPlayer().getLocation());
-			float speed = getPlayer().getWalkSpeed();
-			getPlayer().setWalkSpeed(0.2f);
-			new BukkitRunnable() {
-				
-				@Override
-				public void run() {
-					getPlayer().updateInventory();
-					getPlayer().setWalkSpeed(speed);
-				}
-			}.runTaskLater(MainLg.getInstance(), 5);
+			// Capture player to avoid NPE if LGPlayer.player becomes null
+			Player p = getPlayer();
+			if (p != null) {
+				final float oldSpeed = p.getWalkSpeed();
+				p.setWalkSpeed(0.2f);
+				new BukkitRunnable() {
+					@Override
+					public void run() {
+						if (p.isOnline()) {
+							p.updateInventory();
+							p.setWalkSpeed(oldSpeed);
+						}
+					}
+				}.runTaskLater(MainLg.getInstance(), 5);
+			}
 			//Et c'est bon, le joueur se voit avec un nouveau skin avec quasiment aucun problème visible à l'écran :D
 		}
 	}

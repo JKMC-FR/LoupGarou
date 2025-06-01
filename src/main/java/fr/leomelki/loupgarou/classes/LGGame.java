@@ -355,8 +355,9 @@ public class LGGame implements Listener{
 				
 				ItemStack stack = new ItemStack(LGCustomItems.getItem(getRoles().get(actualRole)));
 				for(LGPlayer lgp : getInGame()) {
-					lgp.getPlayer().getInventory().setItemInOffHand(stack);
-					lgp.getPlayer().updateInventory();
+					// Retiré : plus d’affichage d’item dans la main secondaire
+					// lgp.getPlayer().getInventory().setItemInOffHand(stack);
+					// lgp.getPlayer().updateInventory();
 				}
 			}
 		}.runTaskTimer(MainLg.getInstance(), 0, 4);
@@ -645,6 +646,8 @@ public class LGGame implements Listener{
 				team.setName("you_are");
 				team.sendPacket(lgp.getPlayer());
 				LGPlayer.thePlayer(lgp.getPlayer()).join(MainLg.getInstance().getCurrentGame());
+				team.setNameTagVisibility("always");
+				team.setCollisionRule("never");
 			}
 		//A remettre pour activer le démarrage automatique
 	/*	wait(30, ()->{

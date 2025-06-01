@@ -58,13 +58,13 @@ public class LGCustomItems {
 	}
 	
 	public static void updateItem(LGPlayer lgp) {
-		lgp.getPlayer().getInventory().setItemInOffHand(new ItemStack(getItem(lgp)));
-		lgp.getPlayer().updateInventory();
+//		lgp.getPlayer().getInventory().setItemInOffHand(new ItemStack(getItem(lgp)));
+//		lgp.getPlayer().updateInventory();
 	}
 
 	public static void updateItem(LGPlayer lgp, ArrayList<String> constraints) {
-		lgp.getPlayer().getInventory().setItemInOffHand(new ItemStack(getItem(lgp, constraints)));
-		lgp.getPlayer().updateInventory();
+//		lgp.getPlayer().getInventory().setItemInOffHand(new ItemStack(getItem(lgp, constraints)));
+//		lgp.getPlayer().updateInventory();
 	}
 	
 	@RequiredArgsConstructor
